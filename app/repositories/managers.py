@@ -79,7 +79,6 @@ class OrderManager(BaseManager):
                 for ingredient in ingredients
             )
         )
-        cls.session.commit()  # is this necessary?
         cls.session.add_all(
             (
                 OrderBeverageDetail(order_id=new_order._id, beverage_id=beverage._id,
