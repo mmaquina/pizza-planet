@@ -62,33 +62,35 @@ class ReportManager(BaseManager):
         order_detail_serializer = OrderDetailSerializer
         order_detail_model = OrderDetail
 
-        _objects = cls.session.query(order_detail_model).from_statement(text('SELECT * FROM order_detail GROUP BY ingredient_id ORDER BY count(ingredient_id) DESC LIMIT 1')).all() or []
+        _objects = cls.session.query(order_detail_model).from_statement(\
+            text('SELECT * FROM order_detail GROUP BY ingredient_id ORDER BY count(ingredient_id) DESC LIMIT 1')).all() or []
 
         result = order_detail_serializer().dump(_objects, many=True)
         return result[0]['ingredient']
-
 
     @classmethod
     def get_month_with_most_revenue(cls):
         serializer = OrderSerializer
         model = Order
 
-        _objects = cls.session.query(model).from_statement(text("SELECT * FROM `order` GROUP BY strftime('%m', `date`) ORDER BY SUM(total_price) DESC LIMIT 1")).all() or []
+        _objects = cls.session.query(model).from_statement( \
+            text("SELECT * FROM `order` GROUP BY strftime('%m', `date`) ORDER BY SUM(total_price) DESC LIMIT 1")).all() or []
 
         result = serializer().dump(_objects, many=True)
         year, month, _ = result[0]['date'].split('-')
         return month_name[int(month)] + ", " + str(year)
 
-
     @classmethod
     def get_top3_customers(cls):
-        order_detail_serializer = OrderDetailSerializer
-        order_detail_model = OrderDetail
+        serializer = OrderSerializer
+        model = Order
 
-        _objects = cls.session.query(order_detail_model).from_statement(text('SELECT * FROM order_detail GROUP BY ingredient_id ORDER BY count(ingredient_id) DESC LIMIT 1')).all() or []
+        _objects = cls.session.query(model).from_statement( \
+            text("SELECT * FROM `order` GROUP BY client_name ORDER BY SUM(total_price) DESC LIMIT 3")).all() or []
 
-        result = order_detail_serializer().dump(_objects, many=True)
-        return result[0]['ingredient']
+        result = serializer().dump(_objects, many=True)
+        return [client['client_name'] for client in result]
+
 
 class BeverageManager(BaseManager):
     model = Beverage
