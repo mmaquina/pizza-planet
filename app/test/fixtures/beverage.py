@@ -1,18 +1,7 @@
 import pytest
-from faker import Faker
-from faker.providers import DynamicProvider
 
-from ..utils.functions import get_random_price
+from ..utils.functions import get_random_price, fake
 
-
-fake = Faker()
-
-beverages_provider = DynamicProvider(
-     provider_name="beverage",
-     elements=["Red Beer", "IPA Beer", "Golden Beer", "APA Beer", "Scotish Beer", "1.5L Water", "Cola", "Lemon Soda", "Orange Soda", "Stout Beer", "Bock Beer", "Wheat Beer"],
-)
-
-fake.add_provider(beverages_provider)
 
 def beverage_mock() -> dict:
     return {

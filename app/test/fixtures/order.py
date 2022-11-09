@@ -1,11 +1,5 @@
 import pytest
-from faker import Faker
-from faker.providers import ssn, address, phone_number
-
-from ..utils.functions import shuffle_list
-
-
-fake = Faker()
+from ..utils.functions import shuffle_list, fake
 
 
 def client_data_mock() -> dict:

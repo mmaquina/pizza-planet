@@ -1,18 +1,8 @@
 import pytest
-from faker import Faker
-from faker.providers import DynamicProvider
 
-from ..utils.functions import get_random_price
+from ..utils.functions import get_random_price, fake
 
 
-fake = Faker()
-
-ingredients_provider = DynamicProvider(
-     provider_name="ingredient",
-     elements=["Garlic", "Oregano", "Mozzarella", "Blue Cheese", "Provolone", "Onions", "Tomato", "Pineapple", "Ham", "Pepperoni", "Eggs", "Bacon"],
-)
-
-fake.add_provider(ingredients_provider)
 
 
 def ingredient_mock() -> dict:

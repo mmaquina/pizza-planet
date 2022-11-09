@@ -1,18 +1,6 @@
 import pytest
-from faker import Faker
-from faker.providers import DynamicProvider
 
-from ..utils.functions import get_random_price
-
-
-fake = Faker()
-
-sizes_provider = DynamicProvider(
-     provider_name="size",
-     elements=["Judas", "Peter", "John", "Mark", "Matthew", "Luke" ],
-)
-
-fake.add_provider(sizes_provider)
+from ..utils.functions import get_random_price, fake
 
 
 def size_mock() -> dict:
