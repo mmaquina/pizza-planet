@@ -1,8 +1,6 @@
 from typing import Any, List, Optional, Sequence
 from calendar import month_name
-
 from sqlalchemy.sql import text, column
-from sqlalchemy import func
 
 from .models import Ingredient, Beverage, Order, OrderDetail, Size, OrderBeverageDetail, OrderDetail, db
 from .serializers import (IngredientSerializer, OrderSerializer, OrderDetailSerializer,
@@ -86,7 +84,7 @@ class ReportManager(BaseManager):
         model = Order
 
         _objects = cls.session.query(model).from_statement( \
-            text("SELECT * FROM `order` GROUP BY client_name ORDER BY SUM(total_price) DESC LIMIT 3")).all() or []
+            text("SELECT * FROM `order` GROUP BY client_dni ORDER BY SUM(total_price) DESC LIMIT 3")).all() or []
 
         result = serializer().dump(_objects, many=True)
         return [client['client_name'] for client in result]
