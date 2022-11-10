@@ -1,6 +1,7 @@
 from ..repositories.managers import ReportManager
 from .base import BaseController
 from sqlalchemy.exc import SQLAlchemyError
+
 class ReportController():
     manager = ReportManager
 
@@ -24,3 +25,4 @@ class ReportController():
             return cls.manager.get_top3_customers(), None
         except (SQLAlchemyError, RuntimeError) as ex:
             return None, str(ex)
+            

@@ -1,11 +1,11 @@
 from flask_seeder import Seeder, generator, Faker
 from flask_seeder.generator import Generator
-from app.repositories.models import Order
 from faker import Faker as realFaker
+
+from app.repositories.models import Order
 
 
 fake = realFaker()
-
 
 class fakerGenerator(Generator):
      """ Random Date generator 
@@ -39,4 +39,3 @@ class OrderSeeder(Seeder):
           for o in faker.create(100):
                print("Adding order: %s" % o)
                self.db.session.add(o)
-

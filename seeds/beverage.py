@@ -1,13 +1,12 @@
 from flask_seeder import Seeder, generator, Faker
+
 from app.repositories.models import Beverage
 
 
 # All seeders inherit from Seeder
 class BeverageSeeder(Seeder):
-
-# run() will be called by Flask-Seeder
+     # run() will be called by Flask-Seeder
      def run(self):
-
           faker = Faker(
                cls=Beverage,
                init={
