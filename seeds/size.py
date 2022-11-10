@@ -11,7 +11,7 @@ class SizeSeeder(Seeder):
           faker = Faker(
                cls=Size,
                init={
-                    "name": generator.String("(Small|Medium|Big|Stone Small|Stone Medium|Stone Big)"),
+                    "name": generator.String("(Small|Medium|Big|Stone Small|Stone Medium|Stone Big|Huge|Stone Huge|Gigantic|Stone Gigantic)"),
                     #"name": generator.Name(),
                     "price": generator.Integer(start=0, end=5)
                     }

@@ -16,7 +16,7 @@ class IngredientSeeder(Seeder):
                     "ingredient_id": generator.Integer(start=0, end=10)
                     }
                )     
-          # Create 5 beverages
-          for od in faker.create(1000):
+
+          for od in faker.create(500):
                print("Adding Order Detail: %s" % od)
                self.db.session.add(od)

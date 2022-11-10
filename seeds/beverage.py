@@ -11,7 +11,9 @@ class BeverageSeeder(Seeder):
           faker = Faker(
                cls=Beverage,
                init={
-                    "name": generator.Name(),
+                    "name": generator.String("(Red Beer|IPA Beer|" + \
+                         "Golden Beer|APA Beer|Scotish Beer|1.5L Water|" + \
+                         "Cola|Lemon Soda|Orange Soda|Stout Beer|Bock Beer|Wheat Beer)"),
                     "price": generator.Integer(start=0, end=5)
                     }
                )     

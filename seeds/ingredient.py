@@ -11,7 +11,10 @@ class IngredientSeeder(Seeder):
           faker = Faker(
                cls=Ingredient,
                init={
-                    "name": generator.String("(Garlic|Oregano|Mozzarella|BlueCheese|Provolone|Onions|Tomato|Pineapple|Ham|Pepperoni|Eggs|Bacon)"),
+                    "name": generator.String("(Garlic|Oregano|Mozzarella|" + \
+                         "BlueCheese|Provolone|Onions|Tomato|Pineapple|" + \
+                         "Ham|Pepperoni|Eggs|Bacon|Longaniza|Mushrooms|" + \
+                         "Anchovys|Black Olives|Spinach|Chard|Eggplant|Palm Hearts)"),
                     "price": generator.Integer(start=0, end=5)
                     }
                )     
