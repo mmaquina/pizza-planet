@@ -1,12 +1,14 @@
 import pytest
 
-from ..utils.functions import get_random_price, get_random_string
+from ..utils.functions import get_random_price, fake
+
+
 
 
 def ingredient_mock() -> dict:
     return {
-        'name': get_random_string(),
-        'price': get_random_price(10, 20)
+        'name': fake.ingredient(),
+        'price': get_random_price(0, 10)
     }
 
 
@@ -22,7 +24,7 @@ def ingredient():
 
 @pytest.fixture
 def ingredients():
-    return [ingredient_mock() for _ in range(5)]
+    return [ingredient_mock() for _ in range(10)]
 
 
 @pytest.fixture

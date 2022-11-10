@@ -1,11 +1,18 @@
 import inspect
-
+from flask_sqlalchemy import SQLAlchemy
+from flask_seeder import FlaskSeeder
 from flask import Blueprint, Flask
 
 
 def create_app(config_class: str):
     flask_app = Flask(__name__)
     flask_app.config.from_object(config_class)
+
+    db = SQLAlchemy()
+    db.init_app(flask_app)
+    seeder = FlaskSeeder()
+    seeder.init_app(flask_app, db)
+
     return flask_app
 
 

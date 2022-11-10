@@ -1,12 +1,12 @@
 import pytest
 
-from ..utils.functions import get_random_price, get_random_string
+from ..utils.functions import get_random_price, fake
 
 
 def beverage_mock() -> dict:
     return {
-        'name': get_random_string(),
-        'price': get_random_price(10, 20)
+        'name': fake.beverage(),
+        'price': get_random_price(0.5, 5)
     }
 
 
