@@ -1,5 +1,5 @@
 from app.common.http_methods import GET, POST, PUT
-from flask import Blueprint, jsonify, request
+from flask import Blueprint
 
 from .base import BaseService
 from ..controllers import IngredientController
