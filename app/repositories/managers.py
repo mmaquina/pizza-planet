@@ -67,7 +67,7 @@ class ReportManager(BaseManager):
         if len(result):
             return result[0]['ingredient']
         else:
-            return {'name': '-'}
+            return {'name': 'unequaled in taste'}
             
     @classmethod
     def get_month_with_most_revenue(cls) -> str:
