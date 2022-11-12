@@ -13,8 +13,8 @@ activityDiagram {
 
 start
 note right: Start
-    :The stage version running OK and passing tests;
-    :There are enough new features to deploy a new release?;
+    :The stage version is running OK and passing tests;
+    :There are enough new features to deploy a new release;
     :Make a new release in GitHub;
     group GitHub pipeline
         :CD pipeline is triggered;
@@ -22,7 +22,7 @@ note right: Start
     end group
     group AWS pipeline
         :AWS pipeline is triggered;
-        :Docker build and deploy image to Elastic Container Registry (ECR);
+        :Docker build, test and deploy image to Elastic Container Registry (ECR);
         :CodeDeploy deploys the image to ECS running on a EC2 instance;
     end group
     group Final check
@@ -38,7 +38,6 @@ note right: Start
         endwhile(Yes)        
         end
         note right: End
-
 
 title Pizza-Planet CD procedure
 @enduml
