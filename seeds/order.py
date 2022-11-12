@@ -1,41 +1,30 @@
-from flask_seeder import Seeder, generator, Faker
-from flask_seeder.generator import Generator
-from faker import Faker as realFaker
+from flask_seeder import Seeder 
+from faker import Faker
+from random import random, randint
 
-from app.repositories.models import Order
+from app.test.utils.functions import clients_provider
+from app.controllers import OrderController
 
 
-fake = realFaker()
-
-class fakerGenerator(Generator):
-     """ Random Date generator 
-     """
-
-     def __init__(self, method, **kwargs):
-          super().__init__(**kwargs)
-          self._method = method
-
-     def generate(self):
-          return self._method()
+fake = Faker()
+fake.add_provider(clients_provider)
 
 
 # All seeders inherit from Seeder
 class OrderSeeder(Seeder):
+     def __init__(self, db=None):
+          super().__init__(db=db)
+          self.priority = 9
 
-# run() will be called by Flask-Seeder
+     # run() will be called by Flask-Seeder
      def run(self):
-          faker = Faker(
-               cls=Order,
-               init={
-                    "client_name": fakerGenerator(fake.name),
-                    "total_price": generator.Integer(start=0, end=30),
-                    "size_id": generator.Integer(start=1, end=6),
-                    "client_dni": generator.Integer(start=32132121, end=32132141),
-                    "client_address": fakerGenerator(fake.address),
-                    "client_phone": fakerGenerator(fake.phone_number),
-                    "date": fakerGenerator(fake.date_time_this_year)
-                    }
-               )     
-          for o in faker.create(100):
-               print("Adding order: %s" % o)
-               self.db.session.add(o)
+          for _ in range(120):
+               order = dict(fake.client(), **{'date': fake.date_time_this_year(), 
+                    'size_id': int(random()*5 + 1), 
+                    'ingredients': list(set([randint(1,11) for _ in range(randint(0,11))])), 
+                    'beverages': list(set([randint(1,6) for _ in range(randint(0,6))])) 
+                    })
+               print("Adding order from: %s" % order['client_name'])
+               OrderController.create( order )
+
+

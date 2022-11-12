@@ -5,6 +5,10 @@ from app.repositories.models import Ingredient
 
 # All seeders inherit from Seeder
 class IngredientSeeder(Seeder):
+     def __init__(self, db=None):
+          super().__init__(db=db)
+          self.priority = 2
+
      # run() will be called by Flask-Seeder
      def run(self):
           faker = Faker(

@@ -4,6 +4,9 @@ from app.repositories.models import Size
 
 # All seeders inherit from Seeder
 class SizeSeeder(Seeder):
+     def __init__(self, db=None):
+          super().__init__(db=db)
+          self.priority = 3
 
 # run() will be called by Flask-Seeder
      def run(self):
