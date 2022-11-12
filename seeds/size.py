@@ -1,21 +1,20 @@
-from flask_seeder import Seeder, generator, Faker
-from app.repositories.models import Size
+from flask_seeder import Seeder
+from faker import Faker
+from random import random
+
+from app.controllers import SizeController
+from app.test.utils.functions import sizes_provider
+
+
+fake = Faker()
+fake.add_provider(sizes_provider)
 
 
 # All seeders inherit from Seeder
 class SizeSeeder(Seeder):
-
 # run() will be called by Flask-Seeder
      def run(self):
-
-          faker = Faker(
-               cls=Size,
-               init={
-                    "name": generator.String("(Small|Medium|Big|Stone Small|Stone Medium|Stone Big|Huge|Stone Huge|Gigantic|Stone Gigantic)"),
-                    #"name": generator.Name(),
-                    "price": generator.Integer(start=0, end=5)
-                    }
-               )     
-          for s in faker.create(6):
+          for _ in range(6):
+               s = {'name': fake.unique.size(), 'price': int(random()*500)/100}
                print("Adding size: %s" % s)
-               self.db.session.add(s)
+               SizeController.create(s)

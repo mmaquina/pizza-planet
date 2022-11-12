@@ -43,7 +43,7 @@ fake = Faker()
 
 sizes_provider = DynamicProvider(
      provider_name="size",
-     elements=["Small", "Medium", "Big", "Stone Medium", "Stone Big" ],
+     elements=["Small", "Medium", "Big", "Stone Medium", "Stone Big", "Stone Small", "XL", "Stone XL" ],
 )
 fake.add_provider(sizes_provider)
 
