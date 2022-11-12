@@ -10,7 +10,7 @@ def test__get_most_requested_ingredient__when_there_are_no_orders(client, report
     pytest.assume(response.status.startswith('200'))
     payload = response.json
     print(payload)
-    assert(payload['name'] == '-')
+    assert(payload['name'] == 'unequaled in taste')
     
 
 def test__get_most_requested_ingredient__when_there_are_orders(client, report_uri, create_orders):
