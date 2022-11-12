@@ -1,29 +1,20 @@
-from flask_seeder import Seeder, generator, Faker
+from flask_seeder import Seeder
+from faker import Faker
+from random import random
 
-from app.repositories.models import Ingredient
+from app.controllers import IngredientController
+from app.test.utils.functions import ingredients_provider
+
+
+fake = Faker()
+fake.add_provider(ingredients_provider)
 
 
 # All seeders inherit from Seeder
 class IngredientSeeder(Seeder):
-     def __init__(self, db=None):
-          super().__init__(db=db)
-          self.priority = 2
-
      # run() will be called by Flask-Seeder
      def run(self):
-          faker = Faker(
-               cls=Ingredient,
-               init={
-                    "name": generator.String("(Garlic|Oregano|Mozzarella|" + \
-                         "BlueCheese|Provolone|Onions|Tomato|Pineapple|" + \
-                         "Ham|Pepperoni|Eggs|Bacon|Longaniza|Mushrooms|" + \
-                         "Anchovys|Black Olives|Spinach|Chard|Eggplant|Palm Hearts)"),
-                    "price": generator.Integer(start=0, end=5)
-                    }
-               )     
-          for ingredient in faker.create(10):
-               print("Adding beverage: %s" % ingredient)
-               self.db.session.add(ingredient)
-
-     def __str__(self):
-          return "Name=%s" % (self.name)
+          for _ in range(10):
+               ing = {'name': fake.unique.ingredient(), 'price': int(random()*500)/100}
+               print("Adding ingredient: %s" % ing)
+               IngredientController.create(ing)

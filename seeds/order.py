@@ -12,10 +12,6 @@ fake.add_provider(clients_provider)
 
 # All seeders inherit from Seeder
 class OrderSeeder(Seeder):
-     def __init__(self, db=None):
-          super().__init__(db=db)
-          self.priority = 9
-
      # run() will be called by Flask-Seeder
      def run(self):
           for _ in range(120):
