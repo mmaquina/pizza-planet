@@ -1,4 +1,4 @@
-@startuml development_procedure
+@startuml CD_procedure
 !theme blueprint
 skinparam defaultFontName Arial
 
