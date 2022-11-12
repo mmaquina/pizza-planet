@@ -1,22 +1,23 @@
-from flask_seeder import Seeder, generator, Faker
+from flask_seeder import Seeder 
+from random import random
+from faker import Faker
 
 from app.repositories.models import Beverage
+from app.controllers import BeverageController
+from app.test.utils.functions import beverages_provider
 
+
+fake = Faker()
+fake.add_provider(beverages_provider)
 
 # All seeders inherit from Seeder
 class BeverageSeeder(Seeder):
      # run() will be called by Flask-Seeder
      def run(self):
-          faker = Faker(
-               cls=Beverage,
-               init={
-                    "name": generator.String("(Red Beer|IPA Beer|" + \
-                         "Golden Beer|APA Beer|Scotish Beer|1.5L Water|" + \
-                         "Cola|Lemon Soda|Orange Soda|Stout Beer|Bock Beer|Wheat Beer)"),
-                    "price": generator.Integer(start=0, end=5)
-                    }
-               )     
+
           # Create 5 beverages
-          for beverage in faker.create(5):
+          for _ in range(5):
+               beverage = {'name': fake.unique.beverage(), 'price': int(random()*500)/100}
                print("Adding beverage: %s" % beverage)
-               self.db.session.add(beverage)
+               
+               BeverageController.create( beverage )
