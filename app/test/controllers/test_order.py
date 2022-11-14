@@ -108,7 +108,7 @@ def test_get_all(app, ingredients, beverages, sizes, client_data):
         created_orders.append(created_order)
 
     orders_from_db, error = OrderController.get_all()
-    searchable_orders = {db_order['_id']                         : db_order for db_order in orders_from_db}
+    searchable_orders = {db_order['_id']: db_order for db_order in orders_from_db}
     pytest.assume(error is None)
     for created_order in created_orders:
         current_id = created_order['_id']
