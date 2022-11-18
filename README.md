@@ -10,6 +10,7 @@ This is an example software for a pizzeria that takes customizable orders.
 - [Running the backend project](#running-the-backend-project)
 - [Running the frontend](#running-the-frontend)
 - [Testing the backend](#testing-the-backend)
+- [Kanban board](#kanban-board)
 
 ## Getting started
 
@@ -112,3 +113,6 @@ ext install ritwickdey.LiveServer
 ```bash
 python3 manage.py test
 ```
+
+## Kanban Board
+[https://trello.com/b/NgZ66t3r/pizza-board-tasks](https://trello.com/b/NgZ66t3r/pizza-board-tasks)
